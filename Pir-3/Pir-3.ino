@@ -47,13 +47,13 @@ class Flasher
     }
   }
 };
-   
+  
 
-Flasher led1(LED, 5000, 100);
+Flasher led1(LED, 400, 200);
 
 void setup()
 {
-  
+  pinMode(PIR, INPUT); // Set PIR pin Port
 }
 
 
