@@ -1,15 +1,16 @@
 /*
 
-   Grilos e Fita de Leds ativados por um sensor de presença (PIR) 
+   Som de Grilos e Fita de Leds ativados por um sensor de presença (PIR) 
 
    Cricket sound's and LED ribbon controlled by a PIR. 
 
+   https://github.com/Garagem-Hacker/jardim
+
 */
 
-
-
-#define PIR 2                    // PIR input pin
-#define LED 12                   // LE pin output 
+#define PIR       02                    // PIR input pin
+#define LED       12                    // LED output pin
+#define BUZZER    05                    // Buzzer output pin
 
 class Grilo
 {
@@ -25,6 +26,7 @@ class Grilo
   unsigned long previousMillis;
 
   public:
+  
   Grilo(int pin)
   {
      pinoFalante = pin;
@@ -102,25 +104,24 @@ class Flasher
 };
 
 
-Grilo grilo1(5);
-Flasher led1(LED, 3000, 300);
+Grilo   grilo1(BUZZER);
+Flasher led1(LED, 300, 300);
 
 void setup()
 {
-  Serial.begin(9600);
+  //Serial.begin(9600);
   pinMode(PIR, INPUT); // Set PIR pin input port
 }
 
-
 void loop()
 {
-  if (digitalRead(PIR) == HIGH) 
+  if (digitalRead(PIR) == HIGH)
   {
      int n = random(15000);   // alterar para aumentar ou diminuir o número de grilos cantantes.
      if (n == 437)            // grilos cantam apenas quando for sorteado esse número. 
      {
       grilo1.Cantar();
-      Serial.println(n);      
+      //Serial.println(n);      
      }
      led1.Update();    
   }
