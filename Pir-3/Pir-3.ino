@@ -46,6 +46,11 @@ class Flasher
        digitalWrite(ledPin, ledState); // Update led 
     }
   }
+
+  void Desligar()                     // turn led off
+  {
+    digitalWrite(ledPin, LOW);
+  }
 };
   
 
@@ -57,15 +62,23 @@ void setup()
 }
 
 
+unsigned long readSensor() 
+{
+  // Ler a duração do pulso do sensor em nível alto
+  return pulseIn(PIR, HIGH, 3E6); 
+}
+
 void loop()
 { 
-  if (digitalRead(PIR) == HIGH) 
+  unsigned long sensorIn = readSensor();
+  
+  if (sensorIn > 1E6 && sensorIn < 3E6) // Testar se a largura do pulso está entre 1 e 3 segundos
   {
-     led1.Update();
+     led1.Update();    // Acionar o Led
   } 
   else 
   {
-     digitalWrite(LED, LOW);
+     led1.Desligar();  // Desligar o Led
      
   }
 
